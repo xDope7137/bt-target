@@ -1,3 +1,11 @@
+## What is difference in XDope's version and Original Repo
+
+I have edited some CSS and html to suit my framework.
+
+I will be adding arguments support in Trigger events in near future.
+
+Download at your own risk. Might break your scripts.
+
 # bt-target
  
 Dependencies: https://github.com/mkafrin/PolyZone
