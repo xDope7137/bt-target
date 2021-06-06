@@ -14,7 +14,7 @@
     position: absolute;
     right: 80vh;
     top: 52vh;
-    margin-top: -13px;
+    margin-top: -3px;
     width: 11vh;
 }
 
@@ -23,6 +23,7 @@
     font-size: 1.3vh;
     font-weight: bold;
     font-family: sans-serif;
+    margin-left: 0.2vh;
     color: white;
     text-transform: uppercase;
     user-select: none;
@@ -30,5 +31,7 @@
 }
 
 .target-icon {
-    color: rgb(30,144,255);
+    color: rgb(33, 237, 111);
+    margin-right: 0.5vh;
+    text-shadow: 2px 2px 2px #000000;
 }

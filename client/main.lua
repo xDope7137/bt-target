@@ -1,31 +1,37 @@
 local Models = {}
 local Zones = {}
+XD = nil
 
 Citizen.CreateThread(function()
-    RegisterKeyMapping("+playerTarget", "Player Targeting", "keyboard", "LMENU") --Removed Bind System and added standalone version
+    while true do
+        Citizen.Wait(10)
+        if XD == nil then
+            TriggerEvent("XD:GetObject", function(obj) XD = obj end)    
+            Citizen.Wait(200)
+        end
+        Wait(1000)
+        PlayerJob = XD.Functions.GetPlayerData().job
+    end
+end)
+
+Citizen.CreateThread(function()
+    RegisterKeyMapping("+playerTarget", "Player Targeting", "keyboard", "E") --Removed Bind System and added standalone version
     RegisterCommand('+playerTarget', playerTargetEnable, false)
     RegisterCommand('-playerTarget', playerTargetDisable, false)
     TriggerEvent("chat:removeSuggestion", "/+playerTarget")
     TriggerEvent("chat:removeSuggestion", "/-playerTarget")
 end)
 
-if Config.ESX then
-    Citizen.CreateThread(function()
-        while ESX == nil do
-            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-            Citizen.Wait(0)
-        end
+RegisterNetEvent('XD:Client:OnJobUpdate')
+AddEventHandler('XD:Client:OnJobUpdate', function(JobInfo)
+    PlayerJob = JobInfo
+end)
 
-        PlayerJob = ESX.GetPlayerData().job
+RegisterNetEvent('XD:Client:OnPlayerLoaded')
+AddEventHandler('XD:Client:OnPlayerLoaded', function()
+    PlayerJob = XD.Functions.GetPlayerData().job
+end)
 
-        RegisterNetEvent('esx:setJob')
-        AddEventHandler('esx:setJob', function(job)
-            PlayerJob = job
-        end)
-    end)
-else
-    PlayerJob = Config.NonEsxJob()
-end
 
 function playerTargetEnable()
     if success then return end
@@ -57,8 +63,9 @@ function playerTargetEnable()
                                             local hit, coords, entity = RayCastGamePlayCamera(20.0)
 
                                             DisablePlayerFiring(PlayerPedId(), true)
-
-                                            if (IsControlJustReleased(0, 24) or IsDisabledControlJustReleased(0, 24)) then
+                                            DisableControlAction(2, 142, true)
+                                            
+                                            if (IsControlJustReleased(0, 68) or IsDisabledControlJustReleased(0, 68)) then
                                                 SetNuiFocus(true, true)
                                                 SetCursorLocation(0.5, 0.5)
                                             end
@@ -92,8 +99,9 @@ function playerTargetEnable()
                                     local hit, coords, entity = RayCastGamePlayCamera(20.0)
 
                                     DisablePlayerFiring(PlayerPedId(), true)
-
-                                    if (IsControlJustReleased(0, 24) or IsDisabledControlJustReleased(0, 24)) then
+                                    DisableControlAction(2, 142, true)
+                                    
+                                    if (IsControlJustReleased(0, 68) or IsDisabledControlJustReleased(0, 68)) then
                                         SetNuiFocus(true, true)
                                         SetCursorLocation(0.5, 0.5)
                                     elseif not Zones[_]:isPointInside(coords) or #(vector3(Zones[_].center.x, Zones[_].center.y, Zones[_].center.z) - plyCoords) > zone.targetoptions.distance then
@@ -125,6 +133,10 @@ function playerTargetDisable()
     SendNUIMessage({response = "closeTarget"})
 end
 
+RegisterNUICallback('complete', function(data, cb)
+    playerTargetEnable()
+end)
+
 --NUI CALL BACKS
 
 RegisterNUICallback('selectTarget', function(data, cb)
@@ -134,7 +146,15 @@ RegisterNUICallback('selectTarget', function(data, cb)
 
     targetActive = false
 
-    TriggerEvent(data.event)
+    if data.event.fuck ~= nil then
+        if data.event.fuck1 ~= nil then
+            TriggerEvent(data.event.event, data.event.fuck, data.event.fuck1)
+        else
+            TriggerEvent(data.event.event, data.event.fuck)
+        end
+    else
+        TriggerEvent(data.event.event)
+    end
 end)
 
 RegisterNUICallback('closeTarget', function(data, cb)
@@ -200,13 +220,9 @@ function AddTargetModel(models, parameteres)
     end
 end
 
-function RemoveZone(name)
-    if not Zones[name] then return end
-    if Zones[name].destroy then
-        Zones[name]:destroy()
-    end
-
-    Zones[name] = nil
+function AddEntityZone(name, entity, options, targetoptions)
+    Zones[name] = EntityZone:Create(entity, options)
+    Zones[name].targetoptions = targetoptions
 end
 
 exports("AddCircleZone", AddCircleZone)
@@ -217,4 +233,4 @@ exports("AddPolyzone", AddPolyzone)
 
 exports("AddTargetModel", AddTargetModel)
 
-exports("RemoveZone", RemoveZone)
+exports("AddEntityZone", AddEntityZone)

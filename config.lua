@@ -1,6 +1,6 @@
 Config = {}
 
-Config.ESX = true
+Config.ESX = false
 
 
 -- Return an object in the format
@@ -10,6 +10,6 @@ Config.ESX = true
 
 Config.NonEsxJob = function()
     local PlayerJob = {}
-
+    
     return PlayerJob
 end
