@@ -75,7 +75,7 @@ AddEventHandler('veh:doors', function(doorIndex)
     end
 end)
 
-Citizen.CreateThread(function()
+--[[Citizen.CreateThread(function()
     local bones1 = {
         "door_dside_f",
         "door_pside_f",
@@ -113,4 +113,4 @@ Citizen.CreateThread(function()
         job = {'all'},
         distance = 1.5
     })
-end)
+end)--]]
