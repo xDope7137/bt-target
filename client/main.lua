@@ -17,7 +17,7 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-    RegisterKeyMapping("+playerTarget", "Player Targeting", "keyboard", "E") --Removed Bind System and added standalone version
+    RegisterKeyMapping("+playerTarget", "Player Targeting", "keyboard", "LMENU") --Removed Bind System and added standalone version
     RegisterCommand('+playerTarget', playerTargetEnable, false)
     RegisterCommand('-playerTarget', playerTargetDisable, false)
     TriggerEvent("chat:removeSuggestion", "/+playerTarget")
