@@ -267,8 +267,14 @@ function AddCircleZone(name, center, radius, options, targetoptions)
 end
 
 function AddBoxZone(name, center, length, width, options, targetoptions)
-    Zones[name] = BoxZone:Create(center, length, width, options)
-    Zones[name].targetoptions = targetoptions
+    if not Zones[name] then
+        Zones[name] = BoxZone:Create(center, length, width, options)
+        Zones[name].targetoptions = targetoptions
+    else
+        RemoveZone(name)
+        Zones[name] = BoxZone:Create(center, length, width, options)
+        Zones[name].targetoptions = targetoptions
+    end
 end
 
 function AddPolyzone(name, points, options, targetoptions)
@@ -293,6 +299,15 @@ function AddEntityZone(name, entity, options, targetoptions)
     Zones[name].targetoptions = targetoptions
 end
 
+function RemoveZone(name)
+	if not Zones[name] then return end
+	if Zones[name].destroy then
+		Zones[name]:destroy()
+	end
+
+	Zones[name] = nil
+end
+
 exports("AddCircleZone", AddCircleZone)
 
 exports("AddBoxZone", AddBoxZone)
@@ -304,3 +319,5 @@ exports("AddTargetModel", AddTargetModel)
 exports("AddTargetBone", AddTargetBone)
 
 exports("AddEntityZone", AddEntityZone)
+
+exports("RemoveZone", RemoveZone)
