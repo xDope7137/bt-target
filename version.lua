@@ -13,7 +13,7 @@ Citizen.CreateThread( function()
                         print(
                             ([[^1
 -------------------------------------------------------
-bt-target
+bt-target (https://github.com/xDope7137/bt-target)
 UPDATE: %s AVAILABLE
 CHANGELOG: %s
 -------------------------------------------------------
