@@ -24,3 +24,10 @@ files {
 	'html/css/style.css',
 	'html/js/script.js'
 }
+
+file 'version.json'
+
+server_scripts {
+	'config.lua',
+	'version.lua'
+}

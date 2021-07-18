@@ -1,12 +1,16 @@
 ![Image of Target](https://i.imgur.com/0kTErhu.jpeg)
 
-## What is difference in XDope's version and Original Repo
+## Features :
 
-- Edited CSS.
-- Argument Support for Events.
-- Remove Zone Support (Thanks to https://github.com/OfficialNoms/bt-target)
-- Fixed Duplicate zones when restarting script.
-- AddTargetEntity support
+- RemoveZone added use `exports["bt-target"]:RemoveZone(NameOfZone)`
+- Upto Two Argument Support for Events. 
+- No Duplicate zone will be added when you restart the Script which has target eye code in it.
+- Remove Zone Support `(Thanks to https://github.com/OfficialNoms/bt-target)`
+- AddTargetEntity
+- Can use eye even if the player has weapon in his hand.
+- Fixed a glitch where it would scuff the eye when spamming clicks.
+- Qbus Progress Bar checks for avoiding any exploits (You will need to make your own export in progress bar. isBusy(). Shoot a DM on my discord if you want one. xDope#2788)
+- /fixeye command to fix any glitches related to eye.
 
 Example: 
 
