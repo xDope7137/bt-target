@@ -8,4 +8,4 @@ Config.NonEsxJob = function()
     return PlayerJob
 end
 
-Config.versionCheck = "1.1.1"
+Config.versionCheck = "1.1.0"
