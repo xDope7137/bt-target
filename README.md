@@ -2,6 +2,7 @@
 
 ## Features :
 
+- It will give Notification everytime someone is near zone.
 - RemoveZone added use `exports["bt-target"]:RemoveZone(NameOfZone)`
 - Upto Two Argument Support for Events. 
 - No Duplicate zone will be added when you restart the Script which has target eye code in it.

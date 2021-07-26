@@ -303,6 +303,12 @@ function AddBoxZone(name, center, length, width, options, targetoptions)
         Zones[name] = BoxZone:Create(center, length, width, options)
         Zones[name].targetoptions = targetoptions
     end
+
+    Zones[name]:onPointInOut(PolyZone.getPlayerPosition, function(isPointInside, point)
+        if isPointInside then
+            XD.Functions.Notify("Use your eye", "error",  5500)
+        end
+    end)
 end
 
 function AddPolyzone(name, points, options, targetoptions)
