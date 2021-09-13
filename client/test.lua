@@ -56,7 +56,7 @@ end)
 
 RegisterNetEvent('veh:doors')
 AddEventHandler('veh:doors', function(doorIndex)
-    print('index'..doorIndex)
+    print('index', doorIndex)
     doorIndex = tonumber(doorIndex)
     player = GetPlayerPed(-1)
     veh = XD.Functions.GetClosestVehicle()

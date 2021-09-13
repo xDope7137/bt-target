@@ -36,6 +36,7 @@ AddEventHandler('XD:Client:OnPlayerLoaded', function()
 end)
 
 function playerTargetEnable()
+    print("playerTargetEnable ", success)
     if success then return end
     if exports["progressbar"]:isBusy() then return end
     --if IsPedArmed(PlayerPedId(), 6) then return end
@@ -215,6 +216,9 @@ function playerTargetDisable()
     if success then return end
     targetActive = false
     ClearInterval(1)
+    success = false
+    targetActive = false
+    SetNuiFocus(false, false)
     SendNUIMessage({response = "closeTarget"})
 end
 
@@ -226,6 +230,7 @@ RegisterNUICallback('selectTarget', function(data, cb)
     success = false
     targetActive = false
     SetNuiFocus(false, false)
+    ClearInterval(1)
     if data.event.argument ~= nil then
         if data.event.argument1 ~= nil then
             TriggerEvent(data.event.event, data.event.argument, data.event.argument1)

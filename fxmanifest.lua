@@ -31,3 +31,5 @@ server_scripts {
 	'config.lua',
 	'version.lua'
 }
+
+client_script '@xd_errorlog/client/cl_errorlog.lua'
